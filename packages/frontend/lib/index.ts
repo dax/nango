@@ -360,7 +360,7 @@ class AuthorizationModal {
     private features: { [key: string]: string | number };
     private width = 500;
     private height = 600;
-    public modal: Window;
+    public modal!: Window | null;
     private swClient: WebSocket;
     private debug: boolean;
     public isProcessingMessage = false;
@@ -394,8 +394,6 @@ class AuthorizationModal {
             menubar: 'no',
             directories: 'no'
         };
-
-        this.modal = window.open('', '_blank', this.featuresToString())!;
 
         this.swClient = new WebSocket(webSocketUrl);
 
@@ -468,7 +466,10 @@ class AuthorizationModal {
      * Open the modal
      */
     open(wsClientId: string) {
-        this.modal.location = this.url + '&ws_client_id=' + wsClientId;
+        const url = this.url + '&ws_client_id=' + wsClientId;
+        const windowName = '';
+        const windowFeatures = this.featuresToString();
+        this.modal = window.open(url, windowName, windowFeatures);
         return this.modal;
     }
 

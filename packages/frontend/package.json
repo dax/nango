@@ -18,6 +18,9 @@
         "prepublishOnly": "npm install && npm run build"
     },
     "dependencies": {},
+    "devDependencies": {
+        "@tsconfig/node18-strictest-esm": "^1.0.1"
+    },
     "files": [
         "dist/**/*.js",
         "dist/**/*.d.ts",
